@@ -16,34 +16,22 @@ const depositSchema = yup.object({
             .min(2)
 })
 
-const prevBalance = 100
-export default function Deposit () {
-    const [amount, setAmount] = useState(0)
-    // const createTwoButtonAlert = ({ amount}) =>
-    // Alert.alert(
-    //   `Is ${amount} correct`,
-    //   "My Alert Msg",
-    //   [
-    //     {
-    //       text: "Cancel",
-    //       onPress: () => console.log("Cancel Pressed"),
-    //       style: "cancel"
-    //     },
-    //     { text: "OK", onPress: () => console.log("OK Pressed") }
-    //   ],
-    //   { cancelable: false }
-    // );
 
+export default function Deposit ({ navigation }) {
+    const [amount, setAmount] = useState(0)
+    
     return(
         <View style={GlobalStyles.container}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 
                 <Formik
-                    initialValues={{amount: '', memo: '', balance: prevBalance}}
+                    initialValues={{amount: 0, memo: ''}}
                     validationSchema={depositSchema}
                     onSubmit={(values, actions) => {
                         actions.resetForm();
-                        values.balance = parseInt(values.amount) + parseInt('100');
+                        setAmount(parseInt(values.amount) + parseInt(values.balance))
+                        navigation.navigate('Home')
+                       
                     
                     }}
                 >
@@ -76,8 +64,6 @@ export default function Deposit () {
                                 />
                             </View>
                                 <Text style={styles.errorText}>{props.touched.memo && props.errors.memo}</Text>
-
-                            <Text value={props.values.balance}>New Balance: ${parseInt(props.values.amount) + parseInt(props.values.balance)}</Text>
                             <Button title='Submit' onPress=
                             {
                                 () =>{
