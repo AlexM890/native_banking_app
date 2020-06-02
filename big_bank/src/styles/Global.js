@@ -1,9 +1,15 @@
 import { StyleSheet } from 'react-native'
 
-export default GlobalStyles = StyleSheet.create({
+export const GlobalStyles = StyleSheet.create({
     container:{
         flex: 1,
         justifyContent: "center",
-        alignitems: "center"
+        alignItems: "center"
+    },
+    homeBalanceText:{
+        fontSize: 40
+    },
+    homeBalanceNumber:{
+        fontSize:45
     }
 })
