@@ -22,50 +22,50 @@ export default function Deposit () {
         <View style={GlobalStyles.container}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 
-            <Formik
-                initialValues={{amount: '0', memo: '', balance: prevBalance}}
-                validationSchema={depositSchema}
-                onSubmit={(values, actions) => {
-                    actions.resetForm();
-                    values.balance = parseInt(values.amount) + parseInt('100');
-                
-                }}
-            >
-                {(props) => (
-                    <View>
-                        <View style={styles.container}>
-                            <Text style={styles.text}>Amount: </Text>
+                <Formik
+                    initialValues={{amount: '0', memo: '', balance: prevBalance}}
+                    validationSchema={depositSchema}
+                    onSubmit={(values, actions) => {
+                        actions.resetForm();
+                        values.balance = parseInt(values.amount) + parseInt('100');
+                    
+                    }}
+                >
+                    {(props) => (
+                        <View>
+                            <View style={styles.container}>
+                                <Text style={styles.text}>Amount: </Text>
+                                    <TextInput
+                                        placeholder= 'Deposit Amount'
+                                        onChangeText={props.handleChange('amount')}
+                                        value={props.values.amount}
+                                        keyboardType='numeric'
+                                        onBlur={props.handleBlur('amount')}
+                                        style={styles.input}
+                                        
+                                    />
+                            </View>
+                                <Text style={styles.errorText}>{props.touched.amount && props.errors.amount}</Text>
+                                
+                            <View style={styles.container}>
+                                <Text style={styles.text}>Memo: </Text>
                                 <TextInput
-                                    placeholder= 'Deposit Amount'
-                                    onChangeText={props.handleChange('amount')}
-                                    value={props.values.amount}
-                                    keyboardType='numeric'
-                                    onBlur={props.handleBlur('amount')}
-                                    style={styles.input}
-                                    
+                                    placeholder= 'Memo'
+                                    onChangeText={props.handleChange('memo')}
+                                    value={props.values.memo}
+                                    onBlur={props.handleBlur('memo')}
+                                    style={styles.input2}
+                                    multiline
+                                    minHeight={60}
                                 />
-                        </View>
-                            <Text style={styles.errorText}>{props.touched.amount && props.errors.amount}</Text>
-                            
-                        <View style={styles.container}>
-                            <Text style={styles.text}>Memo: </Text>
-                            <TextInput
-                                placeholder= 'Memo'
-                                onChangeText={props.handleChange('memo')}
-                                value={props.values.memo}
-                                onBlur={props.handleBlur('memo')}
-                                style={styles.input2}
-                                multiline
-                                minHeight={60}
-                            />
-                        </View>
-                            <Text style={styles.errorText}>{props.touched.memo && props.errors.memo}</Text>
+                            </View>
+                                <Text style={styles.errorText}>{props.touched.memo && props.errors.memo}</Text>
 
-                        <Text value={props.values.balance}>New Balance: ${parseInt(props.values.amount) + parseInt(props.values.balance)}</Text>
-                        <Button title='submit' onPress={props.handleSubmit} />
-                    </View>
-                )}
-            </Formik>
+                            <Text value={props.values.balance}>New Balance: ${parseInt(props.values.amount) + parseInt(props.values.balance)}</Text>
+                            <Button title='submit' onPress={props.handleSubmit} />
+                        </View>
+                    )}
+                </Formik>
             </TouchableWithoutFeedback>
         </View>
     )
