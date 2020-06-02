@@ -6,8 +6,8 @@ import * as yup from 'yup'
 const depositSchema = yup.object({
     amount: yup.string()
             .required()
-            .test('is-num-1-1000000', 'Deposit must be more than $0', (val) => {
-                return parseInt(val) < 1000001 && parseInt(val) > 0; 
+            .test('is-num-1-250000', 'Money is only insured up to $250,000', (val) => {
+                return parseInt(val) < 250001 && parseInt(val) > 0; 
             }),
     memo: yup.string()
             .required()
