@@ -1,5 +1,5 @@
-import React from 'react'
-import {Text, View, TextInput, Button, StyleSheet, Keyboard} from 'react-native'
+import React , { useState } from 'react'
+import {Text, View, TextInput, Button, StyleSheet, Keyboard, Alert} from 'react-native'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
@@ -18,12 +18,28 @@ const depositSchema = yup.object({
 
 const prevBalance = 100
 export default function Deposit () {
+    const [amount, setAmount] = useState(0)
+    // const createTwoButtonAlert = ({ amount}) =>
+    // Alert.alert(
+    //   `Is ${amount} correct`,
+    //   "My Alert Msg",
+    //   [
+    //     {
+    //       text: "Cancel",
+    //       onPress: () => console.log("Cancel Pressed"),
+    //       style: "cancel"
+    //     },
+    //     { text: "OK", onPress: () => console.log("OK Pressed") }
+    //   ],
+    //   { cancelable: false }
+    // );
+
     return(
         <View style={GlobalStyles.container}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 
                 <Formik
-                    initialValues={{amount: '0', memo: '', balance: prevBalance}}
+                    initialValues={{amount: '', memo: '', balance: prevBalance}}
                     validationSchema={depositSchema}
                     onSubmit={(values, actions) => {
                         actions.resetForm();
@@ -62,7 +78,26 @@ export default function Deposit () {
                                 <Text style={styles.errorText}>{props.touched.memo && props.errors.memo}</Text>
 
                             <Text value={props.values.balance}>New Balance: ${parseInt(props.values.amount) + parseInt(props.values.balance)}</Text>
-                            <Button title='submit' onPress={props.handleSubmit} />
+                            <Button title='Submit' onPress=
+                            {
+                                () =>{
+                                   
+                                Alert.alert(
+                                  "Are you sure...",
+                                  `Is $${props.values.amount } correct?`,
+                                  [
+                                    {
+                                      text: "Cancel",
+                                      onPress: () => console.log("Cancel Pressed"),
+                                      style: "cancel"
+                                    },
+                                    { text: "OK", onPress:() => props.handleSubmit() }
+                                  ],
+                                  { cancelable: false }
+                                )
+                            }
+                            }
+                             />
                         </View>
                     )}
                 </Formik>
