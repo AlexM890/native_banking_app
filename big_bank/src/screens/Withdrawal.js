@@ -13,6 +13,7 @@ import {
   Alert,
 } from "react-native";
 
+import { GlobalStyles } from '../styles/Global'
 import { Formik } from "formik";
 import * as yup from "yup";
 
@@ -34,7 +35,7 @@ const withdrawalSchema = yup.object({
 const Withdrawal = ({ navigation }) => {
   const [selectedValue, setSelectedValue] = useState("Withdraw");
   return (
-    <View style={styles.screen}>
+    <View style={GlobalStyles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Formik
           initialValues={{
@@ -47,7 +48,7 @@ const Withdrawal = ({ navigation }) => {
             console.log(values);
             console.log(selectedValue);
             actions.resetForm();
-            // navigation.navigate("Home");
+            navigation.navigate("Home");
           }}
         >
           {(props) => {
@@ -134,9 +135,6 @@ const styles = StyleSheet.create({
   checkboxBundles: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  screen: {
-    // alignItems: "center",
   },
   inputRow: {
     flexDirection: "row",
