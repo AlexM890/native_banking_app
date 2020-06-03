@@ -1,16 +1,23 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-// import { GlobalStyles } from '../styles/Global'
 import Navigation from '../routes/TabNavigation'
 import { GlobalStyles } from '../styles/Global'
+import { connect } from 'react-redux'
 
-const Home = () => {
+const Home = (props) => {
     return (
         <View style={GlobalStyles.container}>
             <Text style={GlobalStyles.homeBalanceText}>Balance</Text>
-            <Text style={GlobalStyles.homeBalanceNumber}>0</Text>         
+    <Text style={GlobalStyles.homeBalanceNumber}>{ props.balance }</Text>         
         </View>
     )
 }
 
-export default Home
+const mapStateToProps = (state) =>{
+    return {
+        balance: state.balance
+    }
+}
+
+
+export default connect(mapStateToProps)(Home)
