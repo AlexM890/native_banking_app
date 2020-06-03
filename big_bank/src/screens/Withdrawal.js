@@ -10,6 +10,7 @@ import {
   Picker,
   Keyboard,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 
 import { Formik } from "formik";
@@ -98,7 +99,24 @@ const Withdrawal = ({ navigation }) => {
                   />
                 </View>
                 <Text>{props.touched.Memo && props.errors.Memo}</Text>
-                <Button title="Submit" onPress={props.handleSubmit} />
+                <Button
+                  title="Submit"
+                  onPress={() => {
+                    Alert.alert(
+                      "Are you sure...",
+                      `Is $${props.values.Amount} correct?`,
+                      [
+                        {
+                          text: "Cancel",
+                          onPress: () => console.log("Cancel Pressed"),
+                          style: "cancel",
+                        },
+                        { text: "OK", onPress: () => props.handleSubmit() },
+                      ],
+                      { cancelable: false }
+                    );
+                  }}
+                />
               </View>
             );
           }}
