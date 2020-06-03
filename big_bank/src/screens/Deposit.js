@@ -4,6 +4,9 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { GlobalStyles } from '../styles/Global'
+import { connect } from 'react-redux'
+import { addMoney } from '../actions/balanceActions'
+import { addTransaction } from '../actions/transactionActions'
 
 const depositSchema = yup.object({
     amount: yup.string()
@@ -17,22 +20,20 @@ const depositSchema = yup.object({
 })
 
 
-export default function Deposit ({ navigation }) {
-    const [amount, setAmount] = useState(0)
+function Deposit ({ addMoney, addTransaction, navigation}) {
     
     return(
         <View style={GlobalStyles.container}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 
                 <Formik
-                    initialValues={{amount: 0, memo: ''}}
+                    initialValues={{amount: '', to: 'me', transactionType: 'deposit', memo: ''}}
                     validationSchema={depositSchema}
                     onSubmit={(values, actions) => {
+                        addMoney(parseInt(values.amount))
+                        addTransaction(values)
                         actions.resetForm();
-                        setAmount(parseInt(values.amount) + parseInt(values.balance))
                         navigation.navigate('Home')
-                       
-                    
                     }}
                 >
                     {(props) => (
@@ -92,6 +93,9 @@ export default function Deposit ({ navigation }) {
     )
 }
 
+
+const mapDispatchToProps = { addMoney, addTransaction }
+export default connect(undefined, mapDispatchToProps)(Deposit)
 
 const styles = StyleSheet.create({
     container: {

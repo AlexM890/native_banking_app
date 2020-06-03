@@ -1,9 +1,9 @@
-import { v1 as uuidv1 } from 'uuid'
+import 'react-native-get-random-values'
 import moment from 'moment'
 export const addTransaction = ({ amount = 0, memo = '', to, transactionType}) => ({
     type: 'ADD_TRANSACTION',
     transaction: {
-        id: uuidv1(),
+        id: Math.random(),
         amount,
         memo,
         to,
