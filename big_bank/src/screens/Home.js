@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 const Home = (props) => {
     return (
         <View style={GlobalStyles.container}>
-            <TouchableOpacity onPress={() => console.log("this junt work")}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("TransactionsList")}>
                 <Text style={GlobalStyles.homeBalanceText}>Balance</Text>
                 <Text style={GlobalStyles.homeBalanceNumber}>{ props.balance }</Text>        
             </TouchableOpacity>

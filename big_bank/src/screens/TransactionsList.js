@@ -3,6 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import TransactionsListItem from '../screens/TransactionsListItem'
 import SafeAreaView from 'react-native-safe-area-view'
+import Card from '../shared/Card'
 
 const TransactionsList = (props) => {
 
@@ -17,7 +18,9 @@ const TransactionsList = (props) => {
                     {
                         props.transactions.length > 0 ? props.transactions.map(item => 
                             <TouchableOpacity onPress={() => console.log(item)}>
-                                <TransactionsListItem key={item.id} {...item} />
+                                <Card>
+                                    <TransactionsListItem key={item.id} {...item} />
+                                </Card>
                             </TouchableOpacity>
                             ) :
                             <Text>You have no transactions...</Text>
