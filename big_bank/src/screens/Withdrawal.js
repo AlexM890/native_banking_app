@@ -34,7 +34,7 @@ const withdrawalSchema = yup.object({
 });
 
 const Withdrawal = ({ addTransaction, subtractMoney, navigation }) => {
-  const [selectedValue, setSelectedValue] = useState("Withdraw");
+  const [selectedValue, setSelectedValue] = useState("withdrawal");
 
   return (
     <View style={GlobalStyles.container}>
@@ -66,18 +66,18 @@ const Withdrawal = ({ addTransaction, subtractMoney, navigation }) => {
                 <View>
                   <Picker
                     selectedValue={selectedValue}
-                    style={{ height: 50, width: 150 }}
+                    style={styles.container1}
                     onValueChange={(itemValue, itemIndex) =>
                       setSelectedValue(itemValue)
                     }
                   >
-                    <Picker.Item label="Withdraw" value="Withdraw" />
-                    <Picker.Item label="Transfer" value="Transfer" />
+                    <Picker.Item label="Withdraw" value="withdrawal" />
+                    <Picker.Item label="Transfer" value="transfer" />
                   </Picker>
                 </View>
 
-                <View style={styles.inputRow}>
-                  <Text style={styles.inputText}>Amount : </Text>
+                <View style={styles.container}>
+                  <Text style={styles.text}>Amount : </Text>
                   <TextInput
                     style={styles.input}
                     placeholder="0"
@@ -87,28 +87,30 @@ const Withdrawal = ({ addTransaction, subtractMoney, navigation }) => {
                     onBlur={props.handleBlur("amount")}
                   />
                 </View>
-                <Text>{props.touched.amount && props.errors.amount}</Text>
-                <View style={styles.inputRow}>
-                  <Text>To : </Text>
+                <Text style={styles.errorText}>{props.touched.amount && props.errors.amount}</Text>
+                <View style={styles.container}>
+                  <Text style={styles.text}>To : </Text>
                   <TextInput
+                    placeholder="Where to?"
                     style={styles.input}
                     onChangeText={props.handleChange("to")}
                     value={props.values.to}
                     onBlur={props.handleBlur("to")}
                   />
                 </View>
-                <Text>{props.touched.to && props.errors.to}</Text>
-                <View style={styles.inputRow}>
-                  <Text>Memo : </Text>
+                <Text style={styles.errorText}>{props.touched.to && props.errors.to}</Text>
+                <View style={styles.container}>
+                  <Text style={styles.text}>Memo : </Text>
                   <TextInput
                     style={styles.input}
                     onChangeText={props.handleChange("memo")}
                     value={props.values.memo}
                     multiline
                     onBlur={props.handleBlur("memo")}
+                    minHeight={60}
                   />
                 </View>
-                <Text>{props.touched.memo && props.errors.memo}</Text>
+                <Text style={styles.errorText}>{props.touched.memo && props.errors.memo}</Text>
                 <Button
                   title="Submit"
                   onPress={() => {
@@ -137,28 +139,38 @@ const Withdrawal = ({ addTransaction, subtractMoney, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  checkboxDiv: {
-    marginBottom: 10,
-    backgroundColor: "blue",
-  },
-  checkboxBundles: {
+  container: {
     flexDirection: "row",
-    alignItems: "center",
+    marginVertical: 10,
+    justifyContent: 'space-between',
   },
-  inputRow: {
-    flexDirection: "row",
-    justifyContent: "center",
-    margin: 2,
-    padding: 5,
+  container1: {
+    justifyContent: 'center',
   },
-  inputText: {},
-  inputs: {
+  text: {
+    paddingTop: 4,
+    paddingRight: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 6,
+    fontSize: 18,
     width: "60%",
   },
-  balanceBar: {
-    alignItems: "center",
-    marginTop: 40,
-    marginBottom: 40,
+  input2: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 6,
+    fontSize: 18,
+    width: "60%",
+  },
+  errorText: {
+    color: "red",
+    fontWeight: "bold",
+    marginBottom: 10,
+    marginTop: 6,
+    textAlign: "center",
   },
 });
 

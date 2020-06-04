@@ -9,7 +9,7 @@ const Home = ({navigation , balance}) => {
         <View style={GlobalStyles.container}>
             <TouchableOpacity onPress={() => navigation.navigate("TransactionsList")}>
                 <Text style={GlobalStyles.homeBalanceText}>Balance</Text>
-                <Text style={GlobalStyles.homeBalanceNumber}>{ balance }</Text>        
+                <Text style={GlobalStyles.homeBalanceNumber}>$ { balance }</Text>        
             </TouchableOpacity>
         </View>
     )

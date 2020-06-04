@@ -55,7 +55,6 @@ function Deposit ({ addMoney, addTransaction, navigation}) {
                             <View style={styles.container}>
                                 <Text style={styles.text}>Memo: </Text>
                                 <TextInput
-                                    placeholder= 'Memo'
                                     onChangeText={props.handleChange('memo')}
                                     value={props.values.memo}
                                     onBlur={props.handleBlur('memo')}
@@ -101,6 +100,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     marginVertical: 10,
+    justifyContent: 'space-between'
   },
   text: {
     paddingTop: 4,
