@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import Navigation from '../routes/TabNavigation'
 import { GlobalStyles } from '../styles/Global'
 import { connect } from 'react-redux'
@@ -7,8 +7,10 @@ import { connect } from 'react-redux'
 const Home = (props) => {
     return (
         <View style={GlobalStyles.container}>
-            <Text style={GlobalStyles.homeBalanceText}>Balance</Text>
-    <Text style={GlobalStyles.homeBalanceNumber}>{ props.balance }</Text>         
+            <TouchableOpacity onPress={() => console.log("this junt work")}>
+                <Text style={GlobalStyles.homeBalanceText}>Balance</Text>
+                <Text style={GlobalStyles.homeBalanceNumber}>{ props.balance }</Text>        
+            </TouchableOpacity>
         </View>
     )
 }

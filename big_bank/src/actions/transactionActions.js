@@ -1,4 +1,3 @@
-import 'react-native-get-random-values'
 import moment from 'moment'
 export const addTransaction = ({ amount = 0, memo = '', to, transactionType}) => ({
     type: 'ADD_TRANSACTION',
