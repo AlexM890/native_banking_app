@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Deposit from "../screens/Deposit"
 import Withdrawal from '../screens/Withdrawal'
@@ -11,7 +10,6 @@ const Tab = createBottomTabNavigator();
 export default () => {
 
   return (
-    
       <Tab.Navigator
         tabBarOptions={{
             activeTintColor: 'black',
@@ -24,6 +22,5 @@ export default () => {
         <Tab.Screen name="Deposit" component={Deposit} />
         <Tab.Screen name="Withdrawal" component={Withdrawal} />
       </Tab.Navigator>
-   
   );
 }

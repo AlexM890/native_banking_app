@@ -4,12 +4,12 @@ import Navigation from '../routes/TabNavigation'
 import { GlobalStyles } from '../styles/Global'
 import { connect } from 'react-redux'
 
-const Home = (props) => {
+const Home = ({navigation , balance}) => {
     return (
         <View style={GlobalStyles.container}>
-            <TouchableOpacity onPress={() => props.navigation.navigate("TransactionsList")}>
+            <TouchableOpacity onPress={() => navigation.navigate("TransactionsList")}>
                 <Text style={GlobalStyles.homeBalanceText}>Balance</Text>
-                <Text style={GlobalStyles.homeBalanceNumber}>{ props.balance }</Text>        
+                <Text style={GlobalStyles.homeBalanceNumber}>{ balance }</Text>        
             </TouchableOpacity>
         </View>
     )

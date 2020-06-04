@@ -23,7 +23,7 @@ const depositSchema = yup.object({
 function Deposit ({ addMoney, addTransaction, navigation}) {
     
     return(
-        <View style={GlobalStyles.container}>
+       <View style={GlobalStyles.container}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 
                 <Formik
