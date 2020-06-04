@@ -11,11 +11,11 @@ export const addTransaction = ({ amount = 0, memo = '', to, transactionType}) =>
     }
 })
 export const deleteTransaction = (id) => ({
-    type: 'DELETE_TRANSACTION',
-    id
-})
+  type: "DELETE_TRANSACTION",
+  id,
+});
 export const editTransaction = (id, memo) => ({
-    type: 'EDIT_TRANSACTION',
-    id,
-    memo
-})
+  type: "EDIT_TRANSACTION",
+  id,
+  memo,
+});

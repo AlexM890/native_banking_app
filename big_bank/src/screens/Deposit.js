@@ -9,16 +9,21 @@ import { addMoney } from '../actions/balanceActions'
 import { addTransaction } from '../actions/transactionActions'
 
 const depositSchema = yup.object({
-    amount: yup.string()
-            .required('Amount Required')
-            .test('is-num-1-10000', 'Minimum Deposit $1\nMaximum Deposit $10,000', (val) => {
-                return parseInt(val) < 10001 && parseInt(val) > 0; 
-            }),
-    memo: yup.string()
-            .required('Memo Required')
-            .min(2)
-})
+  amount: yup
+    .string()
+    .required("Amount Required")
+    .test(
+      "is-num-1-10000",
+      "Minimum Deposit $1\nMaximum Deposit $10,000",
+      (val) => {
+        return parseInt(val) < 10001 && parseInt(val) > 0;
+      }
+    ),
+  memo: yup.string().required("Memo Required").min(2),
+});
 
+export default function Deposit({ navigation }) {
+  const [amount, setAmount] = useState(0);
 
 function Deposit ({ addMoney, addTransaction, navigation}) {
     
@@ -98,33 +103,33 @@ const mapDispatchToProps = { addMoney, addTransaction }
 export default connect(undefined, mapDispatchToProps)(Deposit)
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        marginVertical: 10
-    },
-    text: {
-        paddingTop: 4,
-        paddingRight: 10,
-    },
-    input: {
-        borderWidth: 1,
-        borderColor:'#ddd',
-        borderRadius: 6,
-        fontSize: 18,
-        width: '60%'
-    },
-    input2: {
-        borderWidth: 1,
-        borderColor:'#ddd',
-        borderRadius: 6,
-        fontSize: 18,
-        width: '60%'
-    },
-    errorText: {
-        color: 'red',
-        fontWeight: 'bold',
-        marginBottom: 10,
-        marginTop: 6,
-        textAlign: 'center'
-    }
+  container: {
+    flexDirection: "row",
+    marginVertical: 10,
+  },
+  text: {
+    paddingTop: 4,
+    paddingRight: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 6,
+    fontSize: 18,
+    width: "60%",
+  },
+  input2: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 6,
+    fontSize: 18,
+    width: "60%",
+  },
+  errorText: {
+    color: "red",
+    fontWeight: "bold",
+    marginBottom: 10,
+    marginTop: 6,
+    textAlign: "center",
+  }
 })
