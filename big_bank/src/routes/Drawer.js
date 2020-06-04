@@ -11,8 +11,8 @@ export default () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="TabNavigation" component={TabNavigation} />
-        <Drawer.Screen name="HelpStack" component={HelpStack} />
+        <Drawer.Screen name="Home" component={TabNavigation} />
+        <Drawer.Screen name="Help Desk" component={HelpStack} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
