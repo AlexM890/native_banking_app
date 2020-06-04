@@ -1,6 +1,8 @@
 import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack';
 import TransactionsList from '../screens/TransactionsList'
+import { createStackNavigator } from '@react-navigation/stack';
+import Help from '../screens/Help'
+
 import Home from '../screens/Home'
 
 const Stack = createStackNavigator();
@@ -8,8 +10,7 @@ const Stack = createStackNavigator();
 export default () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="TransactionsList" component={TransactionsList} />
+            <Stack.Screen name="Help" component={Help} />
         </Stack.Navigator>      
     );
   }

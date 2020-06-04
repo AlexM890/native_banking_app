@@ -20,20 +20,18 @@ import { connect } from "react-redux";
 import { addTransaction } from "../actions/transactionActions";
 import { subtractMoney } from "../actions/balanceActions";
 
-// const withdrawalSchema = yup.object({
-//   Amount: yup
-//     .string()
-//     .required("Withdraw amount required")
-//     .test(
-//       "is-num-1-10000",
-//       "Withdraw minimum of $1\n Withdraw maximum of $10,000",
-//       (val) => {
-//         return parseInt(val) < 10001 && parseInt(val) > 0;
-//       }
-//     ),
-//   To: yup.string().required("Must enter a recipient").min(2),
-//   Memo: yup.string().required("Memo required").min(2),
-// });
+const withdrawalSchema = yup.object({
+  amount: yup
+    .string()
+    .required("Withdraw amount required")
+    .test(
+      "is-num-1-10000","Withdraw minimum of $1\n Withdraw maximum of $10,000",(val) => {
+        return parseInt(val) < 10001 && parseInt(val) > 0;
+      }
+    ),
+  to: yup.string().required("Must enter a recipient").min(2),
+  memo: yup.string().required("Memo required").min(2),
+});
 
 const Withdrawal = ({ addTransaction, subtractMoney, navigation }) => {
   const [selectedValue, setSelectedValue] = useState("Withdraw");
@@ -47,12 +45,12 @@ const Withdrawal = ({ addTransaction, subtractMoney, navigation }) => {
             to: "",
             memo: "",
           }}
-          // validationSchema={withdrawalSchema}
+          validationSchema={withdrawalSchema}
           onSubmit={(values, actions) => {
-            // console.log({
-            //   transactionType: selectedValue,
-            //   ...values,
-            // });
+            console.log({
+              ...values,
+              transactionType: selectedValue,
+            });
             addTransaction({
               ...values,
               transactionType: selectedValue,
