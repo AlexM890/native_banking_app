@@ -13,40 +13,51 @@ import {
   Alert,
 } from "react-native";
 
-import { GlobalStyles } from '../styles/Global'
+import { GlobalStyles } from "../styles/Global";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { connect } from "react-redux";
+import { addTransaction } from "../actions/transactionActions";
+import { subtractMoney } from "../actions/balanceActions";
 
-const withdrawalSchema = yup.object({
-  Amount: yup
-    .string()
-    .required("Withdraw amount required")
-    .test(
-      "is-num-1-10000",
-      "Withdraw minimum of $1\n Withdraw maximum of $10,000",
-      (val) => {
-        return parseInt(val) < 10001 && parseInt(val) > 0;
-      }
-    ),
-  To: yup.string().required("Must enter a recipient").min(2),
-  Memo: yup.string().required("Memo required").min(2),
-});
+// const withdrawalSchema = yup.object({
+//   Amount: yup
+//     .string()
+//     .required("Withdraw amount required")
+//     .test(
+//       "is-num-1-10000",
+//       "Withdraw minimum of $1\n Withdraw maximum of $10,000",
+//       (val) => {
+//         return parseInt(val) < 10001 && parseInt(val) > 0;
+//       }
+//     ),
+//   To: yup.string().required("Must enter a recipient").min(2),
+//   Memo: yup.string().required("Memo required").min(2),
+// });
 
-const Withdrawal = ({ navigation }) => {
+const Withdrawal = ({ addTransaction, subtractMoney, navigation }) => {
   const [selectedValue, setSelectedValue] = useState("Withdraw");
+
   return (
     <View style={GlobalStyles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Formik
           initialValues={{
-            Amount: 0,
-            To: "",
-            Memo: "",
+            amount: "",
+            to: "",
+            memo: "",
           }}
-          validationSchema={withdrawalSchema}
+          // validationSchema={withdrawalSchema}
           onSubmit={(values, actions) => {
-            console.log(values);
-            console.log(selectedValue);
+            // console.log({
+            //   transactionType: selectedValue,
+            //   ...values,
+            // });
+            addTransaction({
+              ...values,
+              transactionType: selectedValue,
+            });
+            subtractMoney(parseInt(values.amount));
             actions.resetForm();
             navigation.navigate("Home");
           }}
@@ -72,40 +83,40 @@ const Withdrawal = ({ navigation }) => {
                   <TextInput
                     style={styles.input}
                     placeholder="0"
-                    onChangeText={props.handleChange("Amount")}
-                    value={props.values.Amount}
+                    onChangeText={props.handleChange("amount")}
+                    value={props.values.amount}
                     keyboardType="numeric"
-                    onBlur={props.handleBlur("Amount")}
+                    onBlur={props.handleBlur("amount")}
                   />
                 </View>
-                <Text>{props.touched.Amount && props.errors.Amount}</Text>
+                <Text>{props.touched.amount && props.errors.amount}</Text>
                 <View style={styles.inputRow}>
                   <Text>To : </Text>
                   <TextInput
                     style={styles.input}
-                    onChangeText={props.handleChange("To")}
-                    value={props.values.To}
-                    onBlur={props.handleBlur("To")}
+                    onChangeText={props.handleChange("to")}
+                    value={props.values.to}
+                    onBlur={props.handleBlur("to")}
                   />
                 </View>
-                <Text>{props.touched.To && props.errors.To}</Text>
+                <Text>{props.touched.to && props.errors.to}</Text>
                 <View style={styles.inputRow}>
                   <Text>Memo : </Text>
                   <TextInput
                     style={styles.input}
-                    onChangeText={props.handleChange("Memo")}
-                    value={props.values.Memo}
+                    onChangeText={props.handleChange("memo")}
+                    value={props.values.memo}
                     multiline
-                    onBlur={props.handleBlur("Memo")}
+                    onBlur={props.handleBlur("memo")}
                   />
                 </View>
-                <Text>{props.touched.Memo && props.errors.Memo}</Text>
+                <Text>{props.touched.memo && props.errors.memo}</Text>
                 <Button
                   title="Submit"
                   onPress={() => {
                     Alert.alert(
                       "Are you sure...",
-                      `Is $${props.values.Amount} correct?`,
+                      `Is $${props.values.amount} correct?`,
                       [
                         {
                           text: "Cancel",
@@ -144,7 +155,6 @@ const styles = StyleSheet.create({
   },
   inputText: {},
   inputs: {
-    // backgroundColor: "lightgray",
     width: "60%",
   },
   balanceBar: {
@@ -154,4 +164,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Withdrawal;
+const mapDispatchToProps = { addTransaction, subtractMoney };
+export default connect(undefined, mapDispatchToProps)(Withdrawal);
