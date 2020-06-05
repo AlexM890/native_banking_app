@@ -8,8 +8,6 @@ import { addTransaction } from './src/actions/transactionActions';
 
 const store = Store()
 store.subscribe(() => console.log(store.getState()))
-store.dispatch(addMoney(1200))
-store.dispatch(addTransaction({amount:"900", memo:"this shit", to:"him", transactionType:"deposit"}))
 export default function App() {
   return (
     <Provider store={store}>

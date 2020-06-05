@@ -35,7 +35,7 @@ const TransactionsList = (props) => {
                                     <View style={styles.cardContainer}>
                                         <TransactionsListItem key={item.id} {...item} />
                                         <AntDesign name="delete" size={24} color="black" onPress={() => deleteHandler(item, item.id)} />
-                                        <AntDesign name="edit" size={24} color="black" />
+                                        <AntDesign name="infocirlceo" size={24} color="black" />
 
                                     </View>
                                 </Card>

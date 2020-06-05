@@ -28,7 +28,8 @@ const withdrawalSchema = yup.object({
       "is-num-1-10000","Withdraw minimum of $1\n Withdraw maximum of $10,000",(val) => {
         return parseInt(val) < 10001 && parseInt(val) > 0;
       }
-    ),
+    )
+    .matches(/^[0-9]+(\.[0-9]{0,2})?$/gm, 'Must be valid USD amount'),
   to: yup.string().required("Must enter a recipient").min(2),
   memo: yup.string().required("Memo required").min(2),
 });
@@ -57,7 +58,7 @@ const Withdrawal = ({ addTransaction, subtractMoney, navigation }) => {
             });
             subtractMoney(parseInt(values.amount));
             actions.resetForm();
-            navigation.navigate("Home");
+            navigation.navigate("Home", { screen: 'Home' });
           }}
         >
           {(props) => {
