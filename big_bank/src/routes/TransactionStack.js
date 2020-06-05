@@ -4,36 +4,24 @@ import TransactionsList from '../screens/TransactionsList'
 import Home from '../screens/Home'
 import { AntDesign } from '@expo/vector-icons'
 import Header from '../shared/Header'
-import { BlurView } from 'expo-blur'
-
 const Stack = createStackNavigator();
 
-const openMenu = () => {
-    navigation.openDrawer()
-}
+// const openMenu = () => {
+//     navigation.openDrawer()
+// }
 
 export default ({navigation}) => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={Home}       
+            <Stack.Screen name="Home" component={Home}
             options={{
-            headerLeft:() => <AntDesign name='creditcard' size={24} color='black' onPress={(openMenu)} />,
-            title: 'My home',
-            headerStyle: {
-                backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },
-        }}        
+                headerTitle: () => <Header navigation={navigation} title="Kash Money" />
+                }} 
                     />
             <Stack.Screen name="TransactionsList" component={TransactionsList}
              options={{
-                header: () => <Header navigation={navigation} title="Transactions List" />,
-                headerTransparent: true,
-                headerTitle: ""
-            }}
+                headerTitle: () => <Header navigation={navigation} title="Transactions List" />
+                }}
             />
         </Stack.Navigator>      
     );
