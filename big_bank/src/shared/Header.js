@@ -30,10 +30,7 @@ const styles = StyleSheet.create({
     header: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems:"center",
-        backgroundColor: 'purple',
-        height:80,
+        justifyContent: 'space-around'
     },
 
 })
