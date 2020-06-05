@@ -5,6 +5,7 @@ import { GlobalStyles } from '../styles/Global'
 import { connect } from 'react-redux'
 
 const Home = ({navigation , balance}) => {
+    
     return (
         <View style={GlobalStyles.container}>
             <TouchableOpacity onPress={() => navigation.navigate("TransactionsList")}>

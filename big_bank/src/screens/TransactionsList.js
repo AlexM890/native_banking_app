@@ -16,10 +16,10 @@ const TransactionsList = (props) => {
 
     const deleteHandler = (obj, id) => {
         if(obj.transactionType === "deposit"){
-            props.subtractMoney(parseInt(obj.amount))
+            props.subtractMoney(parseFloat(obj.amount))
         }else
         if(obj.transactionType === "transfer" || obj.transactionType === "withdrawal"){
-            props.addMoney(parseInt(obj.amount))
+            props.addMoney(parseFloat(obj.amount))
         }
         props.deleteTransaction(id)
     }
