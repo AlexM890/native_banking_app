@@ -59,6 +59,7 @@ const Withdrawal = ({ addTransaction, subtractMoney, navigation }) => {
             subtractMoney(parseFloat(values.amount));
             actions.resetForm();
             navigation.navigate("Home", { screen: 'Home' });
+            setSelectedValue('withdrawal')
           }}
         >
           {(props) => {
