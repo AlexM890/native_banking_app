@@ -9,10 +9,10 @@ import {
   Form,
   Picker,
   Keyboard,
-  TouchableWithoutFeedback,
   Alert,
 } from "react-native";
 
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { GlobalStyles } from "../styles/Global";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -56,7 +56,7 @@ const Withdrawal = ({ addTransaction, subtractMoney, navigation }) => {
               ...values,
               transactionType: selectedValue,
             });
-            subtractMoney(parseInt(values.amount));
+            subtractMoney(parseFloat(values.amount));
             actions.resetForm();
             navigation.navigate("Home", { screen: 'Home' });
           }}
