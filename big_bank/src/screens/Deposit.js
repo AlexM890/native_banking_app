@@ -15,7 +15,8 @@ const depositSchema = yup.object({
     .test("is-num-1-10000", "Minimum Deposit $1\nMaximum Deposit $10,000",(val) => {
         return parseInt(val) < 10001 && parseInt(val) > 0;
       }
-    ),
+    )
+    .matches(/^[0-9]+(\.[0-9]{0,2})?$/gm, 'Must be valid USD amount'),
   memo: yup.string().required("Memo Required").min(2),
 });
 
@@ -30,10 +31,10 @@ function Deposit ({ addMoney, addTransaction, navigation}) {
                     initialValues={{amount: '', to: 'me', transactionType: 'deposit', memo: ''}}
                     validationSchema={depositSchema}
                     onSubmit={(values, actions) => {
-                        addMoney(parseInt(values.amount))
+                        addMoney(parseFloat(values.amount))
                         addTransaction(values)
                         actions.resetForm();
-                        navigation.navigate('Home')
+                        navigation.navigate('Home', { screen: 'Home' })
                     }}
                 >
                     {(props) => (
@@ -55,7 +56,6 @@ function Deposit ({ addMoney, addTransaction, navigation}) {
                             <View style={styles.container}>
                                 <Text style={styles.text}>Memo: </Text>
                                 <TextInput
-                                    placeholder= 'Memo'
                                     onChangeText={props.handleChange('memo')}
                                     value={props.values.memo}
                                     onBlur={props.handleBlur('memo')}
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     marginVertical: 10,
+    justifyContent: 'space-between'
   },
   text: {
     paddingTop: 4,
