@@ -2,8 +2,15 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
 export default function  Card(props) {
+
+    let cardStyles = styles.card
+
+    if(props.styles){
+        cardStyles = props.styles
+    }
+
     return (
-        <View style={styles.card}>
+        <View style={cardStyles}>
             <View style={styles.cardContent}>
                 {props.children}
             </View>
