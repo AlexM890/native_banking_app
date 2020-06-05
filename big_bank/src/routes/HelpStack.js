@@ -11,13 +11,11 @@ const Stack = createStackNavigator();
 export default ({ navigation }) => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Help Desk" component={Help} 
+            <Stack.Screen name="Help" component={Help} 
             options={{
-                headerBackground: () => <Header navigation={navigation} title="Help Desk" />,
-                headerTransparent: true,
-                headerTitle: ""
-            }} 
-                />
+                headerTitle: () => <Header navigation={navigation} title="Help" />
+                }} 
+            />
         </Stack.Navigator>      
     );
   }
