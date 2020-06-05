@@ -16,7 +16,7 @@ const TransanctionsDetails = ({route}) => {
             </Card>
             <Card styles={styles.card}>
                 <Text>Amount</Text>
-                <Text>{item.amount}</Text>
+                <Text style={styles.text}>{item.amount}</Text>
                 <Text>To Whom</Text>
                 <Text>{item.to}</Text>
             </Card>
