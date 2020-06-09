@@ -6,3 +6,5 @@ export const subtractMoney = (amount) => ({
     type:'SUBTRACT_MONEY',
     amount
 })
+
+const again = () =>({})
