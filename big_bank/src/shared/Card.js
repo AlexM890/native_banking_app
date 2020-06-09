@@ -1,8 +1,20 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, { useEffect, useRef } from 'react'
+import { Animated, StyleSheet, View } from 'react-native'
 
 export default function  Card(props) {
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+    useEffect(()=>{
+        fadeIn()
+    }, [])
 
+    const fadeIn = () => {
+        // Will change fadeAnim value to 1 in 5 seconds
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 1000
+        }).start();
+      };
+    
     let cardStyles = styles.card
 
     if(props.styles){
@@ -10,11 +22,17 @@ export default function  Card(props) {
     }
 
     return (
-        <View style={cardStyles}>
-            <View style={styles.cardContent}>
-                {props.children}
-            </View>
-        </View>
+            <Animated.View style={[
+            cardStyles,
+            {
+                opacity: fadeAnim 
+            }
+            ]}>
+                <View style={styles.cardContent}>
+                    {props.children}
+                </View>
+        
+            </Animated.View>
     )
 }
 
@@ -38,5 +56,9 @@ const styles = StyleSheet.create({
         marginHorizontal: 18,
         marginVertical: 10,
     
-    }
+    },
+    fadingContainer: {
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+      }
 })

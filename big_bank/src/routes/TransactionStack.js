@@ -8,7 +8,11 @@ const Stack = createStackNavigator();
 
 export default ({navigation}) => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+        screenOptions={{
+            gestureEnabled: true,
+            gestureDirection: 'horizontal'
+        }}>
             <Stack.Screen name="Home" component={Home}
             options={{
                 headerTitle: () => <Header navigation={navigation} title="Kash App" />
